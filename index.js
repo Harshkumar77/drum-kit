@@ -28,9 +28,8 @@ function drumRoll(key) {
             var audio = new Audio("sounds/kick-bass.mp3");
             audio.play();
             break;
-        default:
-            console.log(key);
     }
+    pressAnimation(key);
 }
 
 var btns = document.querySelectorAll(".drum");
@@ -38,9 +37,16 @@ var btns = document.querySelectorAll(".drum");
 for (var i = 0; i < btns.length; i++) {
     btns[i].addEventListener('click', function () {
         var key = this.innerHTML;
-        drumRoll(key)
+        drumRoll(key);
     });
 }
 document.addEventListener('keydown', function (event) {
     drumRoll(event.key)
 });
+
+function pressAnimation(key) {
+    document.querySelector("." + key).classList.add("pressed");
+    setTimeout(function () {
+        document.querySelector("." + key).classList.remove("pressed");
+    }, 100);
+}
